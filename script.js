@@ -3,11 +3,28 @@ let currentNumber = 1;
 let correctAnswers = 0;
 const totalNumbers = 10;
 
-// Array of animal emojis
-const animals = ['🐶', '🐱', '🐼', '🦁', '🐯', '🐸', '🐰', '🦊', '🐻', '🐨', '🐷', '🐮', '🦒', '🐘', '🦓', '🦘', '🐧', '🦉', '🦆', '🐔'];
+// Array of animals with free images (Unsplash & Pixabay - vrij te gebruiken in NL)
+const animals = [
+    { name: 'Hond', emoji: '🐶', image: 'https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=600&h=600&fit=crop' },
+    { name: 'Kat', emoji: '🐱', image: 'https://images.unsplash.com/photo-1574158622682-e40e69881006?w=600&h=600&fit=crop' },
+    { name: 'Panda', emoji: '🐼', image: 'https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?w=600&h=600&fit=crop' },
+    { name: 'Leeuw', emoji: '🦁', image: 'https://images.unsplash.com/photo-1546182990-dffeafbe841d?w=600&h=600&fit=crop' },
+    { name: 'Olifant', emoji: '🐘', image: 'https://images.unsplash.com/photo-1564760055775-d63b17a55c44?w=600&h=600&fit=crop' },
+    { name: 'Giraf', emoji: '🦒', image: 'https://images.unsplash.com/photo-1547721064-da6cfb341d50?w=600&h=600&fit=crop' },
+    { name: 'Pinguïn', emoji: '🐧', image: 'https://images.unsplash.com/photo-1551986782-d0169b3f8fa7?w=600&h=600&fit=crop' },
+    { name: 'Konijn', emoji: '🐰', image: 'https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?w=600&h=600&fit=crop' },
+    { name: 'Vos', emoji: '🦊', image: 'https://images.unsplash.com/photo-1474511320723-9a56873867b5?w=600&h=600&fit=crop' },
+    { name: 'Uil', emoji: '🦉', image: 'https://images.unsplash.com/photo-1568393691622-c7ba131d63b4?w=600&h=600&fit=crop' },
+    { name: 'Zebra', emoji: '🦓', image: 'https://images.unsplash.com/photo-1551969014-7d2c4cddf0b6?w=600&h=600&fit=crop' },
+    { name: 'Beer', emoji: '🐻', image: 'https://images.unsplash.com/photo-1589656966895-2f33e7653819?w=600&h=600&fit=crop' },
+    { name: 'Eend', emoji: '🦆', image: 'https://images.unsplash.com/photo-1518384401463-7c0f195d5ce1?w=600&h=600&fit=crop' },
+    { name: 'Koe', emoji: '🐮', image: 'https://images.unsplash.com/photo-1516467508483-a7212febe31a?w=600&h=600&fit=crop' },
+    { name: 'Dolfijn', emoji: '🐬', image: 'https://images.unsplash.com/photo-1607153333879-c174d265f1d2?w=600&h=600&fit=crop' }
+];
 
 // Select random animal for this game
 let currentAnimal = animals[Math.floor(Math.random() * animals.length)];
+let imageLoaded = false;
 
 // DOM elements
 const numbersGrid = document.getElementById('numbersGrid');
@@ -23,9 +40,28 @@ function initGame() {
     currentNumber = 1;
     correctAnswers = 0;
     currentAnimal = animals[Math.floor(Math.random() * animals.length)];
+    imageLoaded = false;
     
-    // Display the animal
-    animalImage.textContent = currentAnimal;
+    // Clear previous image
+    animalImage.innerHTML = '';
+    
+    // Show loading state
+    animalImage.innerHTML = '<div class="loading">Laden... ' + currentAnimal.emoji + '</div>';
+    
+    // Preload the animal image
+    const img = new Image();
+    img.onload = function() {
+        imageLoaded = true;
+        animalImage.innerHTML = '';
+        animalImage.appendChild(img);
+    };
+    img.onerror = function() {
+        // Fallback to emoji if image fails to load
+        animalImage.innerHTML = '<div class="animal-emoji">' + currentAnimal.emoji + '</div>';
+        imageLoaded = true;
+    };
+    img.src = currentAnimal.image;
+    img.alt = currentAnimal.name;
     
     // Reset cover
     animalCover.style.clipPath = 'inset(0 0 0 0)';
