@@ -173,9 +173,9 @@ function updateProgress() {
 function revealAnimal() {
     const percentage = (correctAnswers / totalNumbers) * 100;
     
-    // Reveal from bottom to top
-    const revealAmount = 100 - percentage;
-    animalCover.style.clipPath = `inset(0 0 ${revealAmount}% 0)`;
+    // Reveal from bottom to top - clip away percentage from bottom of cover
+    // This keeps the cover visible at top, revealing image from bottom
+    animalCover.style.clipPath = `inset(0 0 ${percentage}% 0)`;
 }
 
 // Disable all buttons
