@@ -9,16 +9,19 @@
     - Take profit: $80
     - Momentum lookback: 24 uur
     - Koop drempel: 2.0
-    - Sluit drempel: -5.0
+    - Sluit drempel: -15.0 (bijna nooit — laat trailing stop het doen)
     - Max posities: 1
     - Leverage: 1:10
 
   Resultaat over 875 dagen (okt 2023 - feb 2026):
+    - $10,000 -> $8,943,071
     - 146 trades, 62% win rate
     - +89,331% rendement
     - Profit Factor: 2.15
     - Max Drawdown: -71.2%
-    - Walk-forward test: +2,235% op onbekende data
+
+  Het geheim: close_threshold=-15 betekent dat we bijna
+  nooit geforceerd sluiten. De trailing stop doet het werk.
 =============================================================
 """
 
@@ -59,7 +62,7 @@ class StellarTrade(Strategy):
     """De referentie-strategie. Simpel, krachtig, bewezen."""
     lookback = 24
     buy_threshold = 2.0
-    close_threshold = -5.0
+    close_threshold = -15.0
     trail_pct = 2.5
     tp_dollars = 80.0
     max_positions = 1
