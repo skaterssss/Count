@@ -14,25 +14,35 @@
         <div class="game-area">
             <h1>🐾 Telspel met Dieren</h1>
 
-            <div class="animal-container">
-                <div class="animal-cover" id="animalCover"></div>
-                <div class="animal-image" id="animalImage"></div>
+            <!-- Category selection screen -->
+            <div id="categoryScreen">
+                <p class="screen-subtitle">Kies een categorie:</p>
+                <div id="categoryGrid"></div>
             </div>
 
-            <div class="progress-container">
-                <div class="progress-bar" id="progressBar"></div>
-                <span class="progress-text" id="progressText">0 / 10</span>
+            <!-- Game screen -->
+            <div id="gameContent">
+                <div class="animal-container">
+                    <div class="animal-cover" id="animalCover"></div>
+                    <div class="animal-image" id="animalImage"></div>
+                </div>
+
+                <div class="progress-container">
+                    <div class="progress-bar" id="progressBar"></div>
+                    <span class="progress-text" id="progressText">0 / 10</span>
+                </div>
+
+                <div class="target-display" id="targetDisplay">
+                    Zoek: <span class="target-number" id="targetNumber">1</span>
+                </div>
+
+                <div class="numbers-grid" id="numbersGrid"></div>
+
+                <div class="message" id="message"></div>
+
+                <button class="reset-btn" id="resetBtn">🔄 Opnieuw Spelen</button>
+                <button class="back-btn" id="backBtn">← Andere categorie</button>
             </div>
-
-            <div class="target-display" id="targetDisplay">
-                Zoek: <span class="target-number" id="targetNumber">1</span>
-            </div>
-
-            <div class="numbers-grid" id="numbersGrid"></div>
-
-            <div class="message" id="message"></div>
-
-            <button class="reset-btn" id="resetBtn">🔄 Opnieuw Spelen</button>
         </div>
     </div>
 
