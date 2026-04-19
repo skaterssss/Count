@@ -34,6 +34,8 @@ const progressBar = document.getElementById('progressBar');
 const progressText = document.getElementById('progressText');
 const animalCover = document.getElementById('animalCover');
 const animalImage = document.getElementById('animalImage');
+const targetNumberEl = document.getElementById('targetNumber');
+const targetDisplay = document.getElementById('targetDisplay');
 
 // Initialize game
 function initGame() {
@@ -41,13 +43,13 @@ function initGame() {
     correctAnswers = 0;
     currentAnimal = animals[Math.floor(Math.random() * animals.length)];
     imageLoaded = false;
-    
+
     // Clear previous image
     animalImage.innerHTML = '';
-    
+
     // Show loading state
     animalImage.innerHTML = '<div class="loading">Laden... ' + currentAnimal.emoji + '</div>';
-    
+
     // Preload the animal image
     const img = new Image();
     img.onload = function() {
@@ -62,16 +64,20 @@ function initGame() {
     };
     img.src = currentAnimal.image;
     img.alt = currentAnimal.name;
-    
+
     // Reset cover
     animalCover.style.clipPath = 'inset(0 0 0 0)';
-    
+
     // Reset progress
     updateProgress();
-    
+
+    // Reset target display
+    targetNumberEl.textContent = 1;
+    targetDisplay.style.display = 'flex';
+
     // Create number buttons
     createNumberButtons();
-    
+
     // Clear message
     message.textContent = '';
     message.className = 'message';
@@ -80,13 +86,13 @@ function initGame() {
 // Create shuffled number buttons
 function createNumberButtons() {
     numbersGrid.innerHTML = '';
-    
+
     // Create array of numbers 1-10
     const numbers = Array.from({ length: totalNumbers }, (_, i) => i + 1);
-    
+
     // Shuffle the array
     shuffleArray(numbers);
-    
+
     // Create buttons
     numbers.forEach(num => {
         const button = document.createElement('button');
@@ -111,12 +117,10 @@ function shuffleArray(array) {
 function handleNumberClick(event) {
     const button = event.target;
     const clickedNumber = parseInt(button.dataset.number);
-    
+
     if (clickedNumber === currentNumber) {
-        // Correct answer!
         handleCorrectAnswer(button);
     } else {
-        // Wrong answer
         handleWrongAnswer(button);
     }
 }
@@ -125,24 +129,26 @@ function handleNumberClick(event) {
 function handleCorrectAnswer(button) {
     correctAnswers++;
     currentNumber++;
-    
+
     // Visual feedback
     button.classList.add('correct');
     button.disabled = true;
-    
+
     // Update progress
     updateProgress();
-    
+
     // Reveal more of the animal
     revealAnimal();
-    
-    // Show message
+
+    // Update target display
     if (correctAnswers === totalNumbers) {
-        message.textContent = '🎉 Fantastisch! Je hebt alle getallen gevonden! 🎉';
+        targetDisplay.style.display = 'none';
+        message.textContent = '🎉 Fantastisch! Je hebt gewonnen!';
         message.className = 'message success';
         disableAllButtons();
     } else {
-        message.textContent = `✅ Goed gedaan! Zoek nu ${currentNumber}!`;
+        targetNumberEl.textContent = currentNumber;
+        message.textContent = '✅ Goed zo!';
         message.className = 'message success';
     }
 }
@@ -151,14 +157,13 @@ function handleCorrectAnswer(button) {
 function handleWrongAnswer(button) {
     // Visual feedback
     button.classList.add('wrong');
-    
+
     // Remove animation class after animation
     setTimeout(() => {
         button.classList.remove('wrong');
     }, 500);
-    
-    // Show message
-    message.textContent = `❌ Oeps! Probeer nog eens. Zoek ${currentNumber}!`;
+
+    message.textContent = '❌ Oeps! Probeer het opnieuw!';
     message.className = 'message error';
 }
 
@@ -166,15 +171,12 @@ function handleWrongAnswer(button) {
 function updateProgress() {
     const percentage = (correctAnswers / totalNumbers) * 100;
     progressBar.style.width = percentage + '%';
-    progressText.textContent = `${correctAnswers}/${totalNumbers}`;
+    progressText.textContent = `${correctAnswers} / ${totalNumbers}`;
 }
 
 // Reveal animal progressively
 function revealAnimal() {
     const percentage = (correctAnswers / totalNumbers) * 100;
-    
-    // Reveal from bottom to top - clip away percentage from bottom of cover
-    // This keeps the cover visible at top, revealing image from bottom
     animalCover.style.clipPath = `inset(0 0 ${percentage}% 0)`;
 }
 
