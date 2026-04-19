@@ -19,17 +19,17 @@ body {
 
 .container {
     width: 100%;
-    max-width: 480px;
+    max-width: 500px;
 }
 
 .game-area {
     background: white;
-    border-radius: 24px;
-    padding: 20px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    border-radius: 28px;
+    padding: 22px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 14px;
     max-height: calc(100dvh - 24px);
     overflow: hidden;
 }
@@ -37,7 +37,7 @@ body {
 h1 {
     text-align: center;
     color: #6366f1;
-    font-size: clamp(1.1rem, 5vw, 1.5rem);
+    font-size: clamp(1.2rem, 5vw, 1.6rem);
     font-weight: 900;
 }
 
@@ -53,7 +53,7 @@ h1 {
 #gameContent {
     display: none;
     flex-direction: column;
-    gap: 12px;
+    gap: 14px;
 }
 
 #gameContent.active {
@@ -62,7 +62,7 @@ h1 {
 
 .screen-subtitle {
     text-align: center;
-    font-size: 1rem;
+    font-size: 1.1rem;
     font-weight: 800;
     color: #6b7280;
 }
@@ -70,51 +70,46 @@ h1 {
 #categoryGrid {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 10px;
 }
 
 .category-btn {
     width: 100%;
-    padding: 13px 16px;
+    padding: 16px 18px;
     font-family: inherit;
     font-weight: 900;
     color: white;
     border: none;
-    border-radius: 14px;
+    border-radius: 18px;
     cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 14px;
     transition: transform 0.12s ease;
     text-align: left;
 }
 
-.category-btn:hover {
-    transform: translateY(-2px);
-}
-
-.category-btn:active {
-    transform: translateY(3px);
-}
+.category-btn:hover  { transform: translateY(-3px); }
+.category-btn:active { transform: translateY(3px); }
 
 .cat-emoji {
-    font-size: 1.6rem;
+    font-size: 2.2rem;
     flex-shrink: 0;
 }
 
 .cat-info {
     display: flex;
     flex-direction: column;
-    gap: 1px;
+    gap: 2px;
 }
 
 .cat-label {
-    font-size: 1rem;
+    font-size: 1.15rem;
 }
 
 .cat-hint {
-    font-size: 0.78rem;
-    opacity: 0.85;
+    font-size: 0.82rem;
+    opacity: 0.88;
     font-weight: 700;
 }
 
@@ -123,12 +118,18 @@ h1 {
 .animal-container {
     position: relative;
     width: 100%;
-    height: clamp(140px, 28vh, 240px);
-    border-radius: 16px;
+    height: clamp(150px, 30vh, 270px);
+    border-radius: 20px;
     overflow: hidden;
-    border: 3px solid #ede9fe;
+    border: 4px solid #ede9fe;
     background: #f5f3ff;
     flex-shrink: 0;
+    transition: border-color 0.3s;
+}
+
+.animal-container.won {
+    animation: rainbow-border 1.5s linear infinite;
+    border-width: 5px;
 }
 
 .animal-image {
@@ -146,14 +147,14 @@ h1 {
 }
 
 .animal-image .loading {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     color: #a78bfa;
     font-weight: 800;
     animation: fadeInOut 1.5s ease-in-out infinite;
 }
 
 .animal-image .animal-emoji {
-    font-size: clamp(80px, 15vw, 120px);
+    font-size: clamp(90px, 18vw, 130px);
 }
 
 .animal-cover {
@@ -166,7 +167,7 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: clamp(3rem, 10vw, 4.5rem);
+    font-size: clamp(3.5rem, 12vw, 5rem);
 }
 
 .animal-cover::after {
@@ -178,9 +179,9 @@ h1 {
 .progress-container {
     position: relative;
     width: 100%;
-    height: 26px;
+    height: 30px;
     background: #f3f0ff;
-    border-radius: 13px;
+    border-radius: 15px;
     overflow: hidden;
     flex-shrink: 0;
 }
@@ -188,7 +189,7 @@ h1 {
 .progress-bar {
     height: 100%;
     background: linear-gradient(90deg, #6366f1 0%, #a855f7 100%);
-    border-radius: 13px;
+    border-radius: 15px;
     transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     width: 0%;
 }
@@ -199,8 +200,8 @@ h1 {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: 800;
-    font-size: 0.8rem;
+    font-weight: 900;
+    font-size: 0.88rem;
     color: #6366f1;
 }
 
@@ -208,13 +209,13 @@ h1 {
 
 .target-display {
     text-align: center;
-    font-size: clamp(1rem, 3.5vw, 1.15rem);
-    font-weight: 800;
+    font-size: clamp(1.1rem, 4vw, 1.3rem);
+    font-weight: 900;
     color: #6b7280;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    gap: 12px;
     flex-shrink: 0;
 }
 
@@ -222,16 +223,16 @@ h1 {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-width: 46px;
-    height: 46px;
-    padding: 0 10px;
+    min-width: 62px;
+    height: 62px;
+    padding: 0 14px;
     background: linear-gradient(135deg, #f59e0b 0%, #f97316 100%);
     color: white;
-    font-size: 1.4rem;
+    font-size: 1.9rem;
     font-weight: 900;
-    border-radius: 23px;
-    box-shadow: 0 4px 14px rgba(249, 115, 22, 0.45);
-    animation: pulse-soft 2s ease-in-out infinite;
+    border-radius: 31px;
+    box-shadow: 0 5px 18px rgba(249, 115, 22, 0.5);
+    animation: pulse-soft 1.8s ease-in-out infinite;
 }
 
 /* ── Number buttons ── */
@@ -239,57 +240,58 @@ h1 {
 .numbers-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: 8px;
+    gap: 9px;
     flex-shrink: 0;
 }
 
 .number-btn {
     background: linear-gradient(135deg, #f59e0b 0%, #f97316 100%);
     border: none;
-    border-radius: 14px;
+    border-radius: 16px;
     color: white;
     font-family: inherit;
-    font-size: clamp(1.1rem, 4vw, 1.7rem);
+    font-size: clamp(1.4rem, 4.8vw, 2rem);
     font-weight: 900;
     cursor: pointer;
     transition: transform 0.12s ease, box-shadow 0.12s ease;
-    box-shadow: 0 5px 0 #c2570a;
+    box-shadow: 0 6px 0 #c2570a;
     aspect-ratio: 1;
+    min-height: 54px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .number-btn.wide-number {
-    font-size: clamp(0.75rem, 2.8vw, 1.1rem);
+    font-size: clamp(0.8rem, 3vw, 1.15rem);
 }
 
 .number-btn:hover:not(:disabled) {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 0 #c2570a;
+    transform: translateY(-4px);
+    box-shadow: 0 10px 0 #c2570a;
 }
 
 .number-btn:active:not(:disabled) {
-    transform: translateY(3px);
+    transform: translateY(4px);
     box-shadow: 0 2px 0 #c2570a;
 }
 
 .number-btn:disabled {
     background: #e5e7eb;
-    box-shadow: 0 5px 0 #d1d5db;
+    box-shadow: 0 6px 0 #d1d5db;
     color: #9ca3af;
     cursor: not-allowed;
 }
 
 .number-btn.correct {
     background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-    box-shadow: 0 5px 0 #047857;
-    animation: pop 0.3s ease;
+    box-shadow: 0 6px 0 #047857;
+    animation: pop 0.35s ease;
 }
 
 .number-btn.wrong {
     background: linear-gradient(135deg, #f87171 0%, #ef4444 100%);
-    box-shadow: 0 5px 0 #b91c1c;
+    box-shadow: 0 6px 0 #b91c1c;
     animation: shake 0.4s ease;
 }
 
@@ -297,9 +299,9 @@ h1 {
 
 .message {
     text-align: center;
-    font-size: clamp(0.85rem, 3vw, 1rem);
-    font-weight: 800;
-    min-height: 26px;
+    font-size: clamp(0.9rem, 3.5vw, 1.1rem);
+    font-weight: 900;
+    min-height: 28px;
     color: #6b7280;
     flex-shrink: 0;
     display: flex;
@@ -310,40 +312,39 @@ h1 {
 .message.success { color: #10b981; }
 .message.error   { color: #ef4444; }
 
+.message.win {
+    color: #f59e0b;
+    font-size: clamp(1rem, 4vw, 1.3rem);
+    animation: bounce-win 0.5s ease infinite alternate;
+}
+
 /* ── Buttons ── */
 
 .reset-btn {
     width: 100%;
-    padding: 13px;
+    padding: 15px;
     font-family: inherit;
-    font-size: 1rem;
+    font-size: 1.05rem;
     font-weight: 900;
     background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
     color: white;
     border: none;
-    border-radius: 14px;
+    border-radius: 16px;
     cursor: pointer;
     transition: transform 0.12s ease, box-shadow 0.12s ease;
-    box-shadow: 0 5px 0 #4338ca;
+    box-shadow: 0 6px 0 #4338ca;
     flex-shrink: 0;
 }
 
-.reset-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 7px 0 #4338ca;
-}
-
-.reset-btn:active {
-    transform: translateY(3px);
-    box-shadow: 0 2px 0 #4338ca;
-}
+.reset-btn:hover  { transform: translateY(-2px); box-shadow: 0 8px 0 #4338ca; }
+.reset-btn:active { transform: translateY(4px);  box-shadow: 0 2px 0 #4338ca; }
 
 .back-btn {
     background: none;
     border: none;
     color: #9ca3af;
     font-family: inherit;
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     font-weight: 800;
     cursor: pointer;
     padding: 2px;
@@ -352,34 +353,46 @@ h1 {
     flex-shrink: 0;
 }
 
-.back-btn:hover {
-    color: #6366f1;
-}
+.back-btn:hover { color: #6366f1; }
 
 /* ── Animations ── */
 
 @keyframes pulse-soft {
     0%, 100% { transform: scale(1); }
-    50%       { transform: scale(1.1); }
+    50%       { transform: scale(1.12); }
 }
 
 @keyframes pop {
     0%   { transform: scale(1); }
-    50%  { transform: scale(1.2); }
+    50%  { transform: scale(1.25); }
     100% { transform: scale(1); }
 }
 
 @keyframes shake {
     0%, 100% { transform: translateX(0); }
-    20%      { transform: translateX(-8px); }
-    40%      { transform: translateX(8px); }
-    60%      { transform: translateX(-5px); }
-    80%      { transform: translateX(5px); }
+    20%      { transform: translateX(-10px); }
+    40%      { transform: translateX(10px); }
+    60%      { transform: translateX(-6px); }
+    80%      { transform: translateX(6px); }
 }
 
 @keyframes fadeInOut {
     0%, 100% { opacity: 0.5; }
     50%       { opacity: 1; }
+}
+
+@keyframes bounce-win {
+    from { transform: scale(1) rotate(-1deg); }
+    to   { transform: scale(1.06) rotate(1deg); }
+}
+
+@keyframes rainbow-border {
+    0%   { border-color: #f59e0b; }
+    20%  { border-color: #10b981; }
+    40%  { border-color: #3b82f6; }
+    60%  { border-color: #a855f7; }
+    80%  { border-color: #f43f5e; }
+    100% { border-color: #f59e0b; }
 }
 
 /* ── Responsive ── */
@@ -392,28 +405,28 @@ h1 {
 
     .game-area {
         padding: 16px;
-        gap: 10px;
-        border-radius: 20px;
+        gap: 11px;
+        border-radius: 22px;
         max-height: calc(100dvh - 16px);
     }
 
     .animal-container {
-        height: clamp(110px, 22vh, 180px);
+        height: clamp(120px, 24vh, 190px);
     }
 
     .numbers-grid {
-        gap: 6px;
+        gap: 7px;
     }
 }
 
 @media (max-height: 700px) {
     .game-area {
-        gap: 7px;
+        gap: 8px;
         padding: 12px;
     }
 
     .animal-container {
-        height: clamp(90px, 17vh, 130px);
+        height: clamp(90px, 17vh, 140px);
     }
 
     h1 {
@@ -421,12 +434,16 @@ h1 {
     }
 
     .target-number {
-        min-width: 38px;
-        height: 38px;
-        font-size: 1.1rem;
+        min-width: 48px;
+        height: 48px;
+        font-size: 1.4rem;
     }
 
     .progress-container {
-        height: 22px;
+        height: 24px;
+    }
+
+    .number-btn {
+        min-height: 44px;
     }
 }
