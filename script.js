@@ -131,7 +131,13 @@ function initGame() {
     img.src = currentAnimal.image;
     img.alt = currentAnimal.name;
 
+    // Snap cover back without animating (prevents brief image flash on reset)
+    animalCover.style.transition = 'none';
     animalCover.style.clipPath = 'inset(0 0 0 0)';
+    document.querySelector('.animal-container').classList.remove('won');
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+        animalCover.style.transition = '';
+    }));
     updateProgress();
 
     targetNumberEl.textContent = currentCategory.numbers[0];
@@ -189,8 +195,9 @@ function handleCorrectAnswer(button) {
 
     if (correctAnswers === currentCategory.numbers.length) {
         targetDisplay.style.display = 'none';
-        message.textContent = '🎉 Fantastisch! Je hebt gewonnen!';
-        message.className = 'message success';
+        message.textContent = '🎉 Geweldig! Je hebt gewonnen! 🌟';
+        message.className = 'message win';
+        document.querySelector('.animal-container').classList.add('won');
         document.querySelectorAll('.number-btn').forEach(b => b.disabled = true);
     } else {
         targetNumberEl.textContent = currentCategory.numbers[currentIndex];
