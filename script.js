@@ -34,6 +34,8 @@ const progressBar = document.getElementById('progressBar');
 const progressText = document.getElementById('progressText');
 const animalCover = document.getElementById('animalCover');
 const animalImage = document.getElementById('animalImage');
+const targetNumberEl = document.getElementById('targetNumber');
+const targetDisplay = document.getElementById('targetDisplay');
 
 // Initialize game
 function initGame() {
@@ -65,13 +67,17 @@ function initGame() {
     
     // Reset cover
     animalCover.style.clipPath = 'inset(0 0 0 0)';
-    
+
     // Reset progress
     updateProgress();
-    
+
+    // Reset target display
+    targetNumberEl.textContent = 1;
+    targetDisplay.style.display = 'flex';
+
     // Create number buttons
     createNumberButtons();
-    
+
     // Clear message
     message.textContent = '';
     message.className = 'message';
@@ -136,13 +142,15 @@ function handleCorrectAnswer(button) {
     // Reveal more of the animal
     revealAnimal();
     
-    // Show message
+    // Update target display
     if (correctAnswers === totalNumbers) {
-        message.textContent = '🎉 Fantastisch! Je hebt alle getallen gevonden! 🎉';
+        targetDisplay.style.display = 'none';
+        message.textContent = '🎉 Fantastisch! Je hebt gewonnen!';
         message.className = 'message success';
         disableAllButtons();
     } else {
-        message.textContent = `✅ Goed gedaan! Zoek nu ${currentNumber}!`;
+        targetNumberEl.textContent = currentNumber;
+        message.textContent = '✅ Goed zo!';
         message.className = 'message success';
     }
 }
@@ -157,8 +165,7 @@ function handleWrongAnswer(button) {
         button.classList.remove('wrong');
     }, 500);
     
-    // Show message
-    message.textContent = `❌ Oeps! Probeer nog eens. Zoek ${currentNumber}!`;
+    message.textContent = '❌ Oeps! Probeer het opnieuw!';
     message.className = 'message error';
 }
 
@@ -166,7 +173,7 @@ function handleWrongAnswer(button) {
 function updateProgress() {
     const percentage = (correctAnswers / totalNumbers) * 100;
     progressBar.style.width = percentage + '%';
-    progressText.textContent = `${correctAnswers}/${totalNumbers}`;
+    progressText.textContent = `${correctAnswers} / ${totalNumbers}`;
 }
 
 // Reveal animal progressively
